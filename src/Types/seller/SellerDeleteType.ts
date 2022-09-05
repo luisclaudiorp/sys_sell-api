@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 
-export class ProductDeleteType {
+export class SellerDeleteType {
     constructor(){
         this.cpf = undefined
     }

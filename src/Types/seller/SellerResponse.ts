@@ -1,6 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { SellerType } from "./SellerType"
-
+import { ListSeller } from "./ListSeller"
 
 export class SellerResponse {
     constructor(){
@@ -12,5 +11,5 @@ export class SellerResponse {
     message: string
 
     @ApiProperty()
-    listSeller: SellerType
+    listSeller: ListSeller
 }
