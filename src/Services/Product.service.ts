@@ -2,6 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { ProductType } from "../Types/ProductType";
 import { ProductResponse } from "../Types/ProductResponse";
 import { ProductRepository } from "../Repository/Product.repository";
+import { ProductGetType } from "../Types/ProductGetType";
+import { ProductDeleteType } from "../Types/ProductDeleteType";
+import { ListProduct } from "../Types/ListProduct";
+import { ProductUpdatType } from "src/Types/ProductUpdatType";
 
 @Injectable()
 export class ProductService{
@@ -9,11 +13,12 @@ export class ProductService{
         private readonly repository: ProductRepository
     ){}
 
-    async get(product: ProductType): Promise<ProductResponse>{
+    async get(product: ProductGetType): Promise<ProductResponse>{
         let response = new ProductResponse()
         try {
             const results = await this.repository.get(product)
             if(results.length > 0){
+                response.listProduct = new ListProduct()
                 response.listProduct.product = results.map((product)=> {
                     return product
                 })
@@ -43,7 +48,7 @@ export class ProductService{
         return response
     }
 
-    async update(product: ProductType): Promise<ProductResponse>{
+    async update(product: ProductUpdatType): Promise<ProductResponse>{
         let response = new ProductResponse()
         try {
             const result = await this.repository.getById(product.id)
@@ -59,7 +64,7 @@ export class ProductService{
         return response
     }
 
-    async delete(product: ProductType): Promise<ProductResponse>{
+    async delete(product: ProductDeleteType): Promise<ProductResponse>{
         let response = new ProductResponse()
         try {
             const result = await this.repository.getById(product.id)

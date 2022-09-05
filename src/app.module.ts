@@ -15,7 +15,7 @@ import { ProductService } from './Services/Product.service';
       password: '1234',
       database: 'sell',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     }),
     TypeOrmModule.forFeature([
       ProductEntity

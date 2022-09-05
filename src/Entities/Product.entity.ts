@@ -1,8 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity('PRODUTO')
 export class ProductEntity{
-    @PrimaryGeneratedColumn("increment")
+    @PrimaryColumn("int")
     id: number
 
     @Column({nullable: false})
@@ -11,9 +11,9 @@ export class ProductEntity{
     @Column({nullable: false, type: 'float'})
     value: number
 
-    @Column()
+    @Column({nullable: true})
     createAt: Date
 
-    @Column()
+    @Column({nullable: true})
     updatedAt: Date
 }

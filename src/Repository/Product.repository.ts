@@ -2,6 +2,9 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { ProductEntity } from "../Entities/Product.entity";
 import { Repository } from "typeorm";
 import { ProductType } from "../Types/ProductType";
+import { ProductGetType } from "../Types/ProductGetType";
+import { ProductDeleteType } from "../Types/ProductDeleteType";
+import { ProductUpdatType } from "../Types/ProductUpdatType";
 
 export class ProductRepository {
     constructor(
@@ -9,7 +12,7 @@ export class ProductRepository {
         private readonly repository: Repository<ProductEntity>
     ){}
 
-    async get(product: ProductType){
+    async get(product: ProductGetType){
         return await this.repository.find({where: product})
     }
 
@@ -21,12 +24,12 @@ export class ProductRepository {
         return this.repository.insert({name: product.name, value: product.value, createAt: new Date()})
     }
 
-    update(product: ProductType){
+    update(product: ProductUpdatType){
         return this.repository.update({id: product.id}, 
             {name: product.name, value: product.value, updatedAt: new Date()})
     }
 
-    delete(product: ProductType){
+    delete(product: ProductDeleteType){
         return this.repository.delete({id: product.id})
     }
 }

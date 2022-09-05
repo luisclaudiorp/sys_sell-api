@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 
-export class ProductType {
+export class ProductUpdatType {
     constructor(){
         this.name = undefined
         this.value = undefined
@@ -11,11 +11,7 @@ export class ProductType {
 
     @ApiProperty()
     value: number
-    
+
     @ApiProperty()
     id: number
-
-    createAt: Date
-
-    updatedAt: Date
 }
