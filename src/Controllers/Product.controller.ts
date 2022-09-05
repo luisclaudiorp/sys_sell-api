@@ -1,11 +1,11 @@
 import { Query, Controller, Get, Post, Body, Put, Delete } from "@nestjs/common";
 import { ApiBody, ApiTags } from "@nestjs/swagger";
-import { ProductGetType } from "../Types/ProductGetType";
+import { ProductGetType } from "../Types/product/ProductGetType";
 import { ProductService } from "../Services/Product.service";
-import { ProductResponse } from "../Types/ProductResponse";
-import { ProductType } from "../Types/ProductType";
-import { ProductDeleteType } from "src/Types/ProductDeleteType";
-import { ProductUpdatType } from "src/Types/ProductUpdatType";
+import { ProductResponse } from "../Types/product/ProductResponse";
+import { ProductType } from "../Types/product/ProductType";
+import { ProductDeleteType } from "../Types/product/ProductDeleteType";
+import { ProductUpdatType } from "../Types/product/ProductUpdatType";
 
 @ApiTags('Product')
 @Controller('Product')

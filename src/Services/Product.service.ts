@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
-import { ProductType } from "../Types/ProductType";
-import { ProductResponse } from "../Types/ProductResponse";
+import { ProductType } from "../Types/product/ProductType";
+import { ProductResponse } from "../Types/product/ProductResponse";
 import { ProductRepository } from "../Repository/Product.repository";
-import { ProductGetType } from "../Types/ProductGetType";
-import { ProductDeleteType } from "../Types/ProductDeleteType";
-import { ListProduct } from "../Types/ListProduct";
-import { ProductUpdatType } from "src/Types/ProductUpdatType";
+import { ProductGetType } from "../Types/product/ProductGetType";
+import { ProductDeleteType } from "../Types/product/ProductDeleteType";
+import { ListProduct } from "../Types/product/ListProduct";
+import { ProductUpdatType } from "../Types/product/ProductUpdatType";
 
 @Injectable()
 export class ProductService{

@@ -1,10 +1,10 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { ProductEntity } from "../Entities/Product.entity";
 import { Repository } from "typeorm";
-import { ProductType } from "../Types/ProductType";
-import { ProductGetType } from "../Types/ProductGetType";
-import { ProductDeleteType } from "../Types/ProductDeleteType";
-import { ProductUpdatType } from "../Types/ProductUpdatType";
+import { ProductType } from "../Types/product/ProductType";
+import { ProductGetType } from "../Types/product/ProductGetType";
+import { ProductDeleteType } from "../Types/product/ProductDeleteType";
+import { ProductUpdatType } from "../Types/product/ProductUpdatType";
 
 export class ProductRepository {
     constructor(
