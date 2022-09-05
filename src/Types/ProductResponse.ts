@@ -1,15 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { ListaProduto } from "./ListaProduto"
+import { ListProduct } from "./ListProduct"
 
-export class ProdutoTypeResponse {
+
+export class ProductResponse {
     constructor(){
         this.message = undefined
-        this.listaProduto = undefined
+        this.listProduct = undefined
     }
 
     @ApiProperty()
     message: string
 
     @ApiProperty()
-    listaProduto: ListaProduto
+    listProduct: ListProduct
 }

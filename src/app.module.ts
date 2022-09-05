@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProdutoController } from './Controllers/Produto.controller';
-import { ProdutoEntity } from './Entities/Produto.entity';
-import { ProdutoRepository } from './Repository/Produto.repository';
-import { ProdutoService } from './Services/Produto.service';
+import { ProductController } from './Controllers/Product.controller';
+import { ProductEntity } from './Entities/Product.entity';
+import { ProductRepository } from './Repository/Product.repository';
+import { ProductService } from './Services/Product.service';
 
 @Module({
   imports: [
@@ -18,10 +18,10 @@ import { ProdutoService } from './Services/Produto.service';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([
-      ProdutoEntity
+      ProductEntity
     ])
   ],
-  controllers: [ProdutoController],
-  providers: [ProdutoService, ProdutoRepository],
+  controllers: [ProductController],
+  providers: [ProductService, ProductRepository],
 })
 export class AppModule {}

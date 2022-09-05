@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 
-export class ProdutoType {
+export class ProductType {
     constructor(){
         this.name = undefined
         this.value = undefined

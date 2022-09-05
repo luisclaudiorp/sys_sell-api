@@ -1,21 +1,21 @@
 import { Injectable } from "@nestjs/common";
-import { ProdutoType } from "../Types/ProdutoType";
-import { ProdutoRepository } from "../Repository/Produto.repository";
-import { ProdutoTypeResponse } from "../Types/ProdutoTypeResponse";
+import { ProductType } from "../Types/ProductType";
+import { ProductResponse } from "../Types/ProductResponse";
+import { ProductRepository } from "../Repository/Product.repository";
 
 @Injectable()
-export class ProdutoService{
+export class ProductService{
     constructor(
-        private readonly repository: ProdutoRepository
+        private readonly repository: ProductRepository
     ){}
 
-    async get(produto: ProdutoType): Promise<ProdutoTypeResponse>{
-        let response = new ProdutoTypeResponse()
+    async get(product: ProductType): Promise<ProductResponse>{
+        let response = new ProductResponse()
         try {
-            const results = await this.repository.get(produto)
+            const results = await this.repository.get(product)
             if(results.length > 0){
-                response.listaProduto.produto = results.map((produto)=> {
-                    return produto
+                response.listProduct.product = results.map((product)=> {
+                    return product
                 })
                 response.message = "Sucesso"
             }else{
@@ -27,12 +27,12 @@ export class ProdutoService{
         return response
     }
 
-    async create(produto: ProdutoType): Promise<ProdutoTypeResponse>{
-        let response = new ProdutoTypeResponse()
+    async create(product: ProductType): Promise<ProductResponse>{
+        let response = new ProductResponse()
         try {
-            const result = await this.repository.getById(produto.id)
+            const result = await this.repository.getById(product.id)
             if(!result){
-                await this.repository.create(produto)
+                await this.repository.create(product)
                 response.message = getMessageSucess('criado')
             }else{
                 response.message = "Produto ja cadastrado."
@@ -43,12 +43,12 @@ export class ProdutoService{
         return response
     }
 
-    async update(produto: ProdutoType): Promise<ProdutoTypeResponse>{
-        let response = new ProdutoTypeResponse()
+    async update(product: ProductType): Promise<ProductResponse>{
+        let response = new ProductResponse()
         try {
-            const result = await this.repository.getById(produto.id)
+            const result = await this.repository.getById(product.id)
             if(result){
-                await this.repository.update(produto)
+                await this.repository.update(product)
                 response.message = getMessageSucess('atualizado')
             }else{
                 response.message = getMessageNot()
@@ -59,12 +59,12 @@ export class ProdutoService{
         return response
     }
 
-    async delete(produto: ProdutoType): Promise<ProdutoTypeResponse>{
-        let response = new ProdutoTypeResponse()
+    async delete(product: ProductType): Promise<ProductResponse>{
+        let response = new ProductResponse()
         try {
-            const result = await this.repository.getById(produto.id)
+            const result = await this.repository.getById(product.id)
             if(result){
-                await this.repository.delete(produto)
+                await this.repository.delete(product)
                 response.message = getMessageSucess('deletado')
             }else{
                 response.message = getMessageNot()
