@@ -9,8 +9,8 @@ export class ProdutoRepository {
         private readonly repository: Repository<ProdutoEntity>
     ){}
 
-    async get(){
-        return await this.repository.find()
+    async get(produto: ProdutoType){
+        return await this.repository.find({where: produto})
     }
 
     async getById(id: number){
@@ -18,7 +18,7 @@ export class ProdutoRepository {
     }
 
     create(produto: ProdutoType){
-        return this.repository.insert(produto)
+        return this.repository.insert({name: produto.name, value: produto.value, createAt: new Date()})
     }
 
     update(produto: ProdutoType){
