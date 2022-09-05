@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductController } from './Controllers/Product.controller';
 import { SellerController } from './Controllers/Seller.controller';
+import { OrderEntity } from './Entities/Order.entity';
 import { ProductEntity } from './Entities/Product.entity';
 import { SellerEntity } from './Entities/Seller.entity';
 import { ProductRepository } from './Repository/Product.repository';
@@ -19,11 +20,12 @@ import { SellerService } from './Services/Seller.service';
       password: '1234',
       database: 'sell',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false,
+      synchronize: true,
     }),
     TypeOrmModule.forFeature([
       ProductEntity,
-      SellerEntity
+      SellerEntity,
+      OrderEntity
     ])
   ],
   controllers: [ProductController, SellerController],

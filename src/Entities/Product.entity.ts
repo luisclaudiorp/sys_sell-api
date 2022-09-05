@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
+import { OrderEntity } from "./Order.entity";
 
-@Entity('PRODUTO')
+@Entity('PRODUCT')
 export class ProductEntity{
     @PrimaryColumn("int")
     id: number
@@ -16,4 +17,8 @@ export class ProductEntity{
 
     @Column({nullable: true})
     updatedAt: Date
+
+    @ManyToMany(() => OrderEntity)
+    @JoinTable()
+    orders: OrderEntity[]
 }
