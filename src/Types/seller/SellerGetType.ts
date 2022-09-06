@@ -10,5 +10,5 @@ export class SellerGetType {
     name: string
 
     @ApiProperty({required: false})
-    cpf: number
+    cpf: string
 }

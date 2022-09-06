@@ -3,8 +3,8 @@ import { OrderEntity } from "./Order.entity";
 
 @Entity('SELLER')
 export class SellerEntity{
-    @PrimaryColumn({type: "bigint", nullable : false})
-    cpf: number
+    @PrimaryColumn({ nullable : false})
+    cpf: string
 
     @Column({nullable: false})
     name: string

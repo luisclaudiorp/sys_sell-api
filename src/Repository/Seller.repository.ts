@@ -16,7 +16,7 @@ export class SellerRepository {
         return await this.repository.find({where: seller})
     }
 
-    async getById(cpf: number){
+    async getById(cpf: string){
         return await this.repository.findOne({where:{cpf: cpf}})
     }
 

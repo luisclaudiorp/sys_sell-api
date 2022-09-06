@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryColumn } from "typeorm"
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn } from "typeorm"
 import { ProductEntity } from "./Product.entity"
 import { SellerEntity } from "./Seller.entity"
 
@@ -11,9 +11,6 @@ export class OrderEntity{
     amount: number
 
     @Column()
-    seller: number
-
-    @Column()
     createdAt: Date
 
     @Column()
@@ -22,9 +19,8 @@ export class OrderEntity{
     @Column()
     status: number
 
-    @ManyToMany(() => SellerEntity)
-    @JoinColumn()
-    sellers: SellerEntity[]
+    @OneToMany(() => SellerEntity, (seller) => seller.cpf)
+    seller: SellerEntity
 
     @ManyToMany(() => ProductEntity)
     @JoinTable()

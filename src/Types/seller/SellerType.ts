@@ -7,7 +7,7 @@ export class SellerType {
     }
 
     @ApiProperty()
-    cpf: number
+    cpf: string
 
     @ApiProperty()
     name: string

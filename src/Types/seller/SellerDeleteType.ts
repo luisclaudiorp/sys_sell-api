@@ -6,5 +6,5 @@ export class SellerDeleteType {
     }
     
     @ApiProperty()
-    cpf: number
+    cpf: string
 }

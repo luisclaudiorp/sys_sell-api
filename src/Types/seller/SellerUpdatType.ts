@@ -10,5 +10,5 @@ export class SellerUpdatType {
     name: string
 
     @ApiProperty()
-    cpf: number
+    cpf: string
 }
