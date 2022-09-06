@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany,  PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany,  PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { OrderEntity } from "./Order.entity";
 
 @Entity('SELLER')
@@ -15,6 +15,6 @@ export class SellerEntity{
     @Column({nullable: true})
     updatedAt: Date
 
-    @ManyToMany(() => OrderEntity)
+    @OneToMany(() => OrderEntity, (order) => order.id)
     orders: OrderEntity[]
 }

@@ -21,7 +21,7 @@ export class ProductRepository {
     }
 
     create(product: ProductType){
-        return this.repository.insert({id: product.id, name: product.name, value: product.value, createAt: new Date()})
+        return this.repository.save({id: product.id, name: product.name, value: product.value, createAt: new Date()})
     }
 
     update(product: ProductUpdatType){

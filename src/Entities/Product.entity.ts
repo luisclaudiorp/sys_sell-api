@@ -18,7 +18,7 @@ export class ProductEntity{
     @Column({nullable: true})
     updatedAt: Date
 
-    @ManyToMany(() => OrderEntity)
-    @JoinTable()
+    @ManyToMany(() => OrderEntity, (order) => order.products)
+    //@JoinTable()
     orders: OrderEntity[]
 }

@@ -21,7 +21,7 @@ export class SellerRepository {
     }
 
     create(seller: SellerType){
-        return this.repository.insert({name: seller.name, cpf: seller.cpf, createAt: new Date()})
+        return this.repository.save({name: seller.name, cpf: seller.cpf, createAt: new Date()})
     }
 
     update(seller: SellerUpdatType){
