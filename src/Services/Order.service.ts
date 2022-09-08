@@ -7,6 +7,7 @@ import { OrderDeleteType } from "../Types/order/OrderDeleteType";
 import { ListOrder } from "../Types/order/ListOrder";
 import { OrderUpdatType } from "../Types/order/OrderUpdatType";
 import { ProductRepository } from "../Repository/Product.repository";
+import { OrderConverter } from "src/converter/OrderConverter";
 
 
 @Injectable()
@@ -23,7 +24,8 @@ export class OrderService{
             if(results.length > 0){
                 response.listOrder = new ListOrder()
                 response.listOrder.order = results.map((order)=> {
-                    return order
+                    let orderType = OrderConverter.convertEntityToResponse(order)
+                    return orderType
                 })
                 response.message = "Sucesso"
             }else{
@@ -40,9 +42,10 @@ export class OrderService{
         try {
             const result = await this.repository.getById(order?.id)
             if(!result && order?.products?.length > 0){
-                order.amount = await this.getAmount(order)
-
-                // await this.repository.create(order)
+                const { amount, quantities } = await this.getAmount(order)
+                order.amount = amount
+                order.quantities = quantities
+                await this.repository.create(order)
                 response.message = getMessageSucess('criada')
             }else{
                 response.message = "Compra ja cadastrado."
@@ -89,9 +92,11 @@ export class OrderService{
         return response
     }
 
-    async getAmount(order: OrderType): Promise<number>{
+    async getAmount(order: OrderType): Promise<{ amount: number, quantities: number }>{
         let amount = 0
+        let quantities = 0
         for (const product of order?.products) {
+            quantities = quantities + product.quantities
             const getProduct = await this.repositoryProduct.getById(product?.id)
             if(getProduct){
                 amount = amount + (product?.quantities * getProduct?.value)
@@ -99,8 +104,7 @@ export class OrderService{
                 throw new Error(`Um produto da lista nao foi encontrado: Codigo [${product?.id}]`);
             }
         }
-
-        return amount
+        return { amount, quantities }
     }
 }
 

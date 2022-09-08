@@ -6,6 +6,7 @@ import { SellerGetType } from "../Types/seller/SellerGetType";
 import { SellerDeleteType } from "../Types/seller/SellerDeleteType";
 import { ListSeller } from "../Types/seller/ListSeller";
 import { SellerUpdatType } from "../Types/seller/SellerUpdatType";
+import { SellerConverter } from "src/converter/SellerConverter";
 
 @Injectable()
 export class SellerService{
@@ -20,7 +21,8 @@ export class SellerService{
             if(results.length > 0){
                 response.listSeller = new ListSeller()
                 response.listSeller.seller = results.map((seller)=> {
-                    return seller
+                    let sellerentity = SellerConverter.convertEntityToResponse(seller)
+                    return sellerentity
                 })
                 response.message = "Sucesso"
             }else{

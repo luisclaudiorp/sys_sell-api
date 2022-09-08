@@ -23,13 +23,13 @@ export class OrderRepository {
     create(order: OrderType){
         let date = Math.floor(Date.now() / 1000)
         return this.repository.save({
-           id: order.id, amount: order.amount, status: order.status, seller: order.seller, products: order.products, createdAt: date })
+           id: order.id, amount: order.amount, status: order.status, seller: order.seller, products: order.products, createdAt: date, quantities: order.quantities })
     }
 
     update(order: OrderUpdatType){
         let date = Math.floor(Date.now() / 1000)
         return this.repository.update({id: order.id}, 
-            { amount: order.amount, status: order.status, seller: order.seller, products: order.products, updatedAt: date })
+            { amount: order.amount, status: order.status, seller: order.seller, products: order.products, updatedAt: date, quantities: order.quantities })
     }
 
     delete(order: OrderDeleteType){

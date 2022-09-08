@@ -1,16 +1,14 @@
 
 import { DataUtil } from "../utils/DataUtils";
-import { ProductEntity } from "../Entities/Product.entity";
-import { ProductType } from "../Types/product/ProductType";
+import { SellerEntity } from "../Entities/Seller.entity";
+import { SellerType } from "../Types/seller/SellerType";
 
-export class ProductConverter {
+export class SellerConverter {
     private static readonly objectMapper = require('object-mapper')
 
     private static readonly mappeEntityToResponse = {
-            id: "id",
+            cpf: "cpf",
             name: "name",
-            value: "value",
-            quantities: "quantities",
             createdAt: {
                 key: "createdAt",
                 transform: (value) => DataUtil.formatDateByFormat(value, 'DD/MM/YYYY, HH:mm:ss')
@@ -21,9 +19,9 @@ export class ProductConverter {
             },
     }
 
-    public static convertEntityToResponse(product: ProductEntity): ProductType {
-        let productType = new ProductType()
-        productType = this.objectMapper(product, productType,this.mappeEntityToResponse)
-        return productType
+    public static convertEntityToResponse(seller: SellerEntity): SellerType {
+        let sellerType = new SellerType()
+        sellerType = this.objectMapper(seller, sellerType,this.mappeEntityToResponse)
+        return sellerType
     }
 }

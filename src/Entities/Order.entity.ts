@@ -13,6 +13,9 @@ export class OrderEntity{
     @Column()
     status: number
 
+    @Column()
+    quantities: number
+
     @Column({ type: 'int', width: 11, nullable: false, readonly: true})
     createdAt: number
 

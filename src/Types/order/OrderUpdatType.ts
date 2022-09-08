@@ -17,6 +17,9 @@ export class OrderUpdatType {
     status: number
 
     @ApiProperty()
+    quantities: number
+
+    @ApiProperty()
     seller: SellerType
 
     @ApiProperty()

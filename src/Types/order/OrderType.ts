@@ -18,6 +18,8 @@ export class OrderType {
     @ApiProperty()
     status: number
 
+    quantities: number
+
     @ApiProperty()
     seller: SellerOrderType
 
