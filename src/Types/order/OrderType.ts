@@ -13,7 +13,6 @@ export class OrderType {
     @ApiProperty()
     id: number
 
-    @ApiProperty()
     amount: number
 
     @ApiProperty()
@@ -25,7 +24,7 @@ export class OrderType {
     @ApiProperty()
     products: ProductType[]
 
-    createdAt: Date
+    createdAt: number
 
-    updatedAt: Date
+    updatedAt: number
 }

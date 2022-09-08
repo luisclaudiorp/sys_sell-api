@@ -6,6 +6,7 @@ import { ProductGetType } from "../Types/product/ProductGetType";
 import { ProductDeleteType } from "../Types/product/ProductDeleteType";
 import { ListProduct } from "../Types/product/ListProduct";
 import { ProductUpdatType } from "../Types/product/ProductUpdatType";
+import { ProductConverter } from '../converter/ProductConverter';
 
 @Injectable()
 export class ProductService{
@@ -20,7 +21,8 @@ export class ProductService{
             if(results.length > 0){
                 response.listProduct = new ListProduct()
                 response.listProduct.product = results.map((product)=> {
-                    return product
+                    let productEntity = ProductConverter.convertEntityToResponse(product)
+                    return productEntity
                 })
                 response.message = "Sucesso"
             }else{

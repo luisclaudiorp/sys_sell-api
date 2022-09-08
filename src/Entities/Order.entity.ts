@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm"
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm"
 import { ProductEntity } from "./Product.entity"
 import { SellerEntity } from "./Seller.entity"
 
@@ -13,11 +13,11 @@ export class OrderEntity{
     @Column()
     status: number
 
-    @CreateDateColumn()
-    createdAt: Date
+    @Column({ type: 'int', width: 11, nullable: false, readonly: true})
+    createdAt: number
 
-    @UpdateDateColumn()
-    updatedAt: Date
+    @Column({ type: 'int', width: 11, nullable: true,})
+    updatedAt: number
 
     @ManyToOne(() => SellerEntity, (seller) => seller.cpf, {eager: true, onDelete: 'SET NULL'})
     @JoinColumn()

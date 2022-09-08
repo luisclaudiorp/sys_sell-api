@@ -4,6 +4,7 @@ export class ProductUpdatType {
     constructor(){
         this.name = undefined
         this.value = undefined
+        this.quantities = undefined
     }
     
     @ApiProperty()
@@ -14,4 +15,7 @@ export class ProductUpdatType {
 
     @ApiProperty()
     id: number
+
+    @ApiProperty()
+    quantities: number
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryColumn } from "typeorm";
 import { OrderEntity } from "./Order.entity";
 
 @Entity('PRODUCT')
@@ -11,14 +11,16 @@ export class ProductEntity{
 
     @Column({nullable: false, type: 'float'})
     value: number
+    
+    @Column({default: 0})
+    quantities: number
 
-    @Column({nullable: true})
-    createAt: Date
+    @Column({ type: 'int', width: 11, nullable: false, readonly: true})
+    createdAt: number
 
-    @Column({nullable: true})
-    updatedAt: Date
+    @Column({ type: 'int', width: 11, nullable: true,})
+    updatedAt: number
 
     @ManyToMany(() => OrderEntity, (order) => order.products)
-    //@JoinTable()
     orders: OrderEntity[]
 }

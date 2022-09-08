@@ -11,4 +11,8 @@ export class SellerType {
 
     @ApiProperty()
     name: string
+
+    createdAt: number
+
+    updatedAt: number
 }

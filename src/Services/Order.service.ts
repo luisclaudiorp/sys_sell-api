@@ -6,11 +6,14 @@ import { OrderGetType } from "../Types/order/OrderGetType";
 import { OrderDeleteType } from "../Types/order/OrderDeleteType";
 import { ListOrder } from "../Types/order/ListOrder";
 import { OrderUpdatType } from "../Types/order/OrderUpdatType";
+import { ProductRepository } from "../Repository/Product.repository";
+
 
 @Injectable()
 export class OrderService{
     constructor(
-        private readonly repository: OrderRepository
+        private readonly repository: OrderRepository,
+        private readonly repositoryProduct: ProductRepository
     ){}
 
     async get(order: OrderGetType): Promise<OrderResponse>{
@@ -35,15 +38,21 @@ export class OrderService{
     async create(order: OrderType): Promise<OrderResponse>{
         let response = new OrderResponse()
         try {
-            const result = await this.repository.getById(order.id)
-            if(!result){
-                await this.repository.create(order)
+            const result = await this.repository.getById(order?.id)
+            if(!result && order?.products?.length > 0){
+                order.amount = await this.getAmount(order)
+
+                // await this.repository.create(order)
                 response.message = getMessageSucess('criada')
             }else{
                 response.message = "Compra ja cadastrado."
             }
         } catch (error) {
-            response.message = error?.sqlMessage
+            if(error?.sqlMessage){
+                response.message = error?.sqlMessage
+            }else{
+                response.message = error?.message
+            }
         }
         return response
     }
@@ -51,7 +60,7 @@ export class OrderService{
     async update(order: OrderUpdatType): Promise<OrderResponse>{
         let response = new OrderResponse()
         try {
-            const result = await this.repository.getById(order.id)
+            const result = await this.repository.getById(order?.id)
             if(result){
                 await this.repository.update(order)
                 response.message = getMessageSucess('atualizada')
@@ -67,7 +76,7 @@ export class OrderService{
     async delete(order: OrderDeleteType): Promise<OrderResponse>{
         let response = new OrderResponse()
         try {
-            const result = await this.repository.getById(order.id)
+            const result = await this.repository.getById(order?.id)
             if(result){
                 await this.repository.delete(order)
                 response.message = getMessageSucess('deletada')
@@ -79,6 +88,20 @@ export class OrderService{
         }
         return response
     }
+
+    async getAmount(order: OrderType): Promise<number>{
+        let amount = 0
+        for (const product of order?.products) {
+            const getProduct = await this.repositoryProduct.getById(product?.id)
+            if(getProduct){
+                amount = amount + (product?.quantities * getProduct?.value)
+            }else{
+                throw new Error(`Um produto da lista nao foi encontrado: Codigo [${product?.id}]`);
+            }
+        }
+
+        return amount
+    }
 }
 
 function getMessageSucess(message: string): string {
@@ -88,3 +111,4 @@ function getMessageSucess(message: string): string {
 function getMessageNot(): string{
     return `Compra nao encontrada.`
 }
+

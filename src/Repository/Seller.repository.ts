@@ -21,12 +21,14 @@ export class SellerRepository {
     }
 
     create(seller: SellerType){
-        return this.repository.save({name: seller.name, cpf: seller.cpf, createAt: new Date()})
+        let date = Math.floor(Date.now() / 1000)
+        return this.repository.save({name: seller.name, cpf: seller.cpf, createdAt: date})
     }
 
     update(seller: SellerUpdatType){
+        let date = Math.floor(Date.now() / 1000)
         return this.repository.update({cpf: seller.cpf}, 
-            {name: seller.name, updatedAt: new Date()})
+            {name: seller.name, updatedAt: date})
     }
 
     delete(seller: SellerDeleteType){

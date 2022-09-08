@@ -21,12 +21,14 @@ export class ProductRepository {
     }
 
     create(product: ProductType){
-        return this.repository.save({id: product.id, name: product.name, value: product.value, createAt: new Date()})
+        let date = Math.floor(Date.now() / 1000)
+        return this.repository.save({id: product.id, name: product.name, value: product.value, quantities: product.quantities, createdAt: date})
     }
 
     update(product: ProductUpdatType){
+        let date = Math.floor(Date.now() / 1000)
         return this.repository.update({id: product.id}, 
-            {name: product.name, value: product.value, updatedAt: new Date()})
+            {name: product.name, value: product.value, quantities: product.quantities, updatedAt: date})
     }
 
     delete(product: ProductDeleteType){

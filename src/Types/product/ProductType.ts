@@ -2,10 +2,17 @@ import { ApiProperty } from "@nestjs/swagger"
 
 export class ProductType {
     constructor(){
+        this.id = undefined
         this.name = undefined
         this.value = undefined
+        this.quantities = undefined
+        this.createdAt = undefined
+        this.updatedAt = undefined
     }
-    
+
+    @ApiProperty()
+    id: number
+
     @ApiProperty()
     name: string
 
@@ -13,9 +20,9 @@ export class ProductType {
     value: number
     
     @ApiProperty()
-    id: number
+    quantities: number
 
-    createAt: Date
+    createdAt: number
 
-    updatedAt: Date
+    updatedAt: number
 }
