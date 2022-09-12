@@ -7,14 +7,16 @@ import { OrderDeleteType } from "../Types/order/OrderDeleteType";
 import { ListOrder } from "../Types/order/ListOrder";
 import { OrderUpdatType } from "../Types/order/OrderUpdatType";
 import { ProductRepository } from "../Repository/Product.repository";
-import { OrderConverter } from "src/converter/OrderConverter";
+import { OrderConverter } from "../converter/OrderConverter";
+import { SendMailProducerService } from "../jobs/sendMail-producer-service";
 
 
 @Injectable()
 export class OrderService{
     constructor(
         private readonly repository: OrderRepository,
-        private readonly repositoryProduct: ProductRepository
+        private readonly repositoryProduct: ProductRepository,
+        private readonly sendMailService: SendMailProducerService
     ){}
 
     async get(order: OrderGetType): Promise<OrderResponse>{
@@ -47,6 +49,7 @@ export class OrderService{
                 order.quantities = quantities
                 await this.repository.create(order)
                 response.message = getMessageSucess('criada')
+                this.sendMailService.sendMail(order)
             }else{
                 response.message = "Compra ja cadastrado."
             }
