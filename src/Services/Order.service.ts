@@ -8,7 +8,7 @@ import { ListOrder } from "../Types/order/ListOrder";
 import { OrderUpdatType } from "../Types/order/OrderUpdatType";
 import { ProductRepository } from "../Repository/Product.repository";
 import { OrderConverter } from "../converter/OrderConverter";
-import { SendMailProducerService } from "../jobs/sendMail-producer-service";
+import { SendMailProducerService } from "../jobs/SendMail-producer-service";
 
 
 @Injectable()
@@ -47,7 +47,7 @@ export class OrderService{
                 const { amount, quantities } = await this.getAmount(order)
                 order.amount = amount
                 order.quantities = quantities
-                await this.repository.create(order)
+                //await this.repository.create(order)
                 response.message = getMessageSucess('criada')
                 this.sendMailService.sendMail(order)
             }else{
